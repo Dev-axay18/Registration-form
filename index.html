@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Registration Form</title>
+  <style>
+    /* Internal CSS for styling */
+    body, h2, label, input, select, textarea, button {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      /* background-image:url(background1234.jpg); */
+      /* background-size: cover; */
+    }
+
+    body {
+      background-color: #f4f7f6;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      background-image: url(background1234.jpg);
+      background-size:cover;
+      /* background-position:100px; */
+    }
+
+    form {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    section {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      background-color: #81bf97;
+      color: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #4a90e2;
+      outline: none;
+    }
+    input:hover{
+        box-shadow: 1px 0px 3px black ;
+        transition: ease-out 0.1s;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form-row select {
+      width: auto;
+    }
+
+    .form-row input[type="text"],
+    .form-row input[type="tel"],
+    .form-row input[type="email"] {
+      width: 100%;
+    }
+
+    .radio-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      box-shadow:0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    button {
+      background-color: #81bf97;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #609e76;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .required::after {
+      content: "*";
+      color: red;
+      margin-left: 5px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+    
+  <form id="patient-registration-form">
+    <!-- Registration Details Section -->
+    <section>
+      <h2>Registration Details</h2>
+      <label for="reg-date" class="required">Date of Registration:</label>
+      <div class="form-row">
+        <select id="reg-date-day" name="reg-date-day" required>
+          <script>
+            for (let i = 1; i <= 31; i++) {
+              document.write(`<option value="${i}">${i}</option>`);
+            }
+          </script>
+        </select>
+        <select id="reg-date-month" name="reg-date-month" required>
+          <option value="Jan">January</option>
+          <option value="Feb">February</option>
+          <option value="Mar">March</option>
+          <option value="Apr">April</option>
+          <option value="May">May</option>
+          <option value="Jun">June</option>
+          <option value="Jul">July</option>
+          <option value="Aug">August</option>
+          <option value="Sep">September</option>
+          <option value="Oct">October</option>
+          <option value="Nov">November</option>
+          <option value="Dec">December</option>
+          <!-- Add remaining months -->
+        </select>
+        <select id="reg-date-year" name="reg-date-year" required>
+          <script>
+            for (let year = 2023; year <= 2030; year++) {
+              document.write(`<option value="${year}">${year}</option>`);
+            }
+          </script>
+        </select>
+      </div>
+
+      <label for="reg-time" class="required">Time of Registration:</label>
+      <div class="form-row">
+        <select id="reg-time-hour" name="reg-time-hour" required>
+          <script>
+            for (let hour = 1; hour <= 12; hour++) {
+              document.write(`<option value="${hour}">${hour}</option>`);
+            }
+          </script>
+        </select>
+        <select id="reg-time-minute" name="reg-time-minute" required>
+          <script>
+            for (let minute = 0; minute < 60; minute++) {
+              const paddedMinute = minute.toString().padStart(2, '0');
+              document.write(`<option value="${paddedMinute}">${paddedMinute}</option>`);
+            }
+          </script>
+        </select>
+        <select id="reg-time-ampm" name="reg-time-ampm" required>
+          <option value="am">AM</option>
+          <option value="pm">PM</option>
+        </select>
+      </div>
+
+      <label for="healthcare-number">Healthcare Number:</label>
+      <input type="text" id="healthcare-number" name="healthcare-number" placeholder="Enter healthcare number">
+    </section>
+
+    <!-- Personal Details Section -->
+    <section>
+      <h2>Personal Details</h2>
+      <label for="first-name" class="required">First Name:</label>
+      <input type="text" id="first-name" name="first-name" placeholder="Enter first name" required>
+
+      <label for="middle-name">Middle Name:</label>
+      <input type="text" id="middle-name" name="middle-name" placeholder="Enter middle name">
+
+      <label for="last-name" class="required">Last Name:</label>
+      <input type="text" id="last-name" name="last-name" placeholder="Enter last name" required>
+
+      <label for="gender" class="required">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="dob" class="required">Date of Birth:</label>
+      <div class="form-row">
+        <select id="dob-day" name="dob-day" required>
+          <script>
+            for (let i = 1; i <= 31; i++) {
+              document.write(`<option value="${i}">${i}</option>`);
+            }
+          </script>
+        </select>
+        <select id="dob-month" name="dob-month" required>
+            <option value="Jan">January</option>
+            <option value="Feb">February</option>
+            <option value="Mar">March</option>
+            <option value="Apr">April</option>
+            <option value="May">May</option>
+            <option value="Jun">June</option>
+            <option value="Jul">July</option>
+            <option value="Aug">August</option>
+            <option value="Sep">September</option>
+            <option value="Oct">October</option>
+            <option value="Nov">November</option>
+            <option value="Dec">December</option>
+          <!-- Add remaining months -->
+        </select>
+        <select id="dob-year" name="dob-year" required>
+          <script>
+            for (let year = 1900; year <= 2023; year++) {
+              document.write(`<option value="${year}">${year}</option>`);
+            }
+          </script>
+        </select>
+      </div>
+
+      <label for="phone" class="required">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter email address">
+    </section>
+
+    <!-- Address Section -->
+    <section>
+      <h2>Address</h2>
+      <label for="address-line1" class="required">Address Line 1:</label>
+      <input type="text" id="address-line1" name="address-line1" placeholder="Enter address line 1" required>
+
+      <label for="address-line2">Address Line 2:</label>
+      <input type="text" id="address-line2" name="address-line2" placeholder="Enter address line 2">
+
+      <label for="state" class="required">State:</label>
+      <select id="state" name="state" required onchange="updateCities()">
+        <option value="">Select State</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+        <option value="Chandigarh">Chandigarh</option>
+        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+        <option value="Ladakh">Ladakh</option>
+        <option value="Lakshadweep">Lakshadweep</option>
+        <option value="Puducherry">Puducherry</option>
+        
+        <!-- Add more states as needed -->
+      </select>
+      
+      <label for="city" class="required">City:</label>
+      <select id="city" name="city" required>
+        <option value="">Select City</option>
+      </select>
+        <!-- Add all states of India here -->
+      </select>
+
+      <!-- <label for="city" class="required">City:</label>
+      <select id="city" name="city" required> -->
+     
+      </select>
+
+      <label for="pin-code" class="required">Pin Code:</label>
+      <input type="text" id="pin-code" name="pin-code" placeholder="Enter pin code" required>
+    </section>
+
+    <!-- Emergency Contact Section -->
+    <section>
+      <h2>Emergency Contact</h2>
+      <label for="emergency-contact-name" class="required">Emergency
+
+        <label for="emergency-contact-name" class="required">Emergency Contact Name:</label>
+        <input type="text" id="emergency-contact-name" name="emergency-contact-name" placeholder="Enter emergency contact name" required>
+  
+        <label for="emergency-contact-relation" class="required">Relationship:</label>
+        <input type="text" id="emergency-contact-relation" name="emergency-contact-relation" placeholder="Enter relationship" required>
+  
+        <label for="emergency-contact-phone" class="required">Phone Number:</label>
+        <input type="tel" id="emergency-contact-phone" name="emergency-contact-phone" placeholder="Enter emergency contact phone number" required>
+      </section>
+  
+      <!-- Health History Section -->
+      <section>
+        <h2>Health History</h2>
+        <label for="health-conditions">Current or Past Health Conditions:</label>
+        <textarea id="health-conditions" name="health-conditions" placeholder="Describe any health conditions"></textarea>
+  
+        <label class="required">Are you currently taking any medications?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="medications" value="yes" required> Yes</label>
+          <label><input type="radio" name="medications" value="no" required> No</label>
+        </div>
+      </section>
+  
+      <!-- Form Submission and PDF Download -->
+      <button type="submit" id="submit-btn">Submit</button>
+      <button type="button" id="download-pdf-btn">Download as PDF</button>
+    </form>
+  
+    <!-- Include the jsPDF library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+      // Function to download the form data as a PDF
+      document.getElementById('download-pdf-btn').addEventListener('click', function () {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+  
+        // Form data extraction
+        const formData = {
+          'Date of Registration': document.getElementById('reg-date-day').value + ' ' +
+                                 document.getElementById('reg-date-month').value + ' ' +
+                                 document.getElementById('reg-date-year').value,
+          'Time of Registration': document.getElementById('reg-time-hour').value + ':' +
+                                  document.getElementById('reg-time-minute').value + ' ' +
+                                  document.getElementById('reg-time-ampm').value,
+          'Healthcare Number': document.getElementById('healthcare-number').value,
+          'First Name': document.getElementById('first-name').value,
+          'Middle Name': document.getElementById('middle-name').value,
+          'Last Name': document.getElementById('last-name').value,
+          'Gender': document.getElementById('gender').value,
+          'Date of Birth': document.getElementById('dob-day').value + ' ' +
+                           document.getElementById('dob-month').value + ' ' +
+                           document.getElementById('dob-year').value,
+          'Phone Number': document.getElementById('phone').value,
+          'Email': document.getElementById('email').value,
+          'Address Line 1': document.getElementById('address-line1').value,
+          'Address Line 2': document.getElementById('address-line2').value,
+          'State': document.getElementById('state').value,
+          'City': document.getElementById('city').value,
+          'Pin Code': document.getElementById('pin-code').value,
+          'Emergency Contact Name': document.getElementById('emergency-contact-name').value,
+          'Emergency Contact Relationship': document.getElementById('emergency-contact-relation').value,
+          'Emergency Contact Phone': document.getElementById('emergency-contact-phone').value,
+          'Health Conditions': document.getElementById('health-conditions').value,
+          'Taking Medications': document.querySelector('input[name="medications"]:checked').value
+        };
+  
+        // Format the data into the PDF
+        let yPosition = 10;
+        for (const [key, value] of Object.entries(formData)) {
+          doc.text(`${key}: ${value}`, 10, yPosition);
+          yPosition += 10;
+        }
+  
+        // Save the PDF
+        doc.save('patient_registration.pdf');
+      });
+    </script>
+    <script>
+        // Define cities for each state
+        const citiesByState = {
+            "Andhra Pradesh": [
+  "Adoni", "Amaravati", "Anakapalle", "Anantapur", "Bapatla", 
+  "Bhimavaram", "Chilakaluripet", "Chittoor", "Dharmavaram", "Eluru", 
+  "Gooty", "Gudivada", "Gudur", "Guntakal", "Guntur", 
+  "Hindupur", "Jaggaiahpet", "Kadapa", "Kakinada", "Kavali", 
+  "Kurnool", "Macherla", "Machilipatnam", "Madanapalle", "Mandapeta", 
+  "Markapur", "Nagari", "Nandyal", "Narasaraopet", "Nellore", 
+  "Nidadavole", "Nuzvid", "Ongole", "Palacole", "Parvathipuram", 
+  "Proddatur", "Punganur", "Puttur", "Rajahmundry", "Rajam", 
+  "Rayachoti", "Sattenapalle", "Srikakulam", "Tadepalligudem", "Tadipatri", 
+  "Tenali", "Tirupati", "Tuni", "Vijayawada", "Vinukonda", 
+  "Visakhapatnam", "Vizianagaram", "Yemmiganur"
+],
+"Arunachal Pradesh": [
+  "Bomdila", "Itanagar", "Naharlagun", "Pasighat", "Tawang",
+  "Ziro", "Along", "Anini", "Basar", "Changlang",
+  "Daporijo", "Khonsa", "Namsai", "Roing", "Seppa",
+  "Tezu", "Yingkiong", "Longding"
+],
+"Assam": [
+  "Guwahati", "Dibrugarh", "Jorhat", "Silchar", "Tezpur",
+  "Tinsukia", "Nagaon", "Sivasagar", "Goalpara", "Barpeta",
+  "Diphu", "Bongaigaon", "Kokrajhar", "Dhemaji", "Karimganj",
+  "Lakhimpur", "Hailakandi", "Morigaon", "Nalbari", "Golaghat"
+],
+"Bihar": [
+  "Patna", "Gaya", "Bhagalpur", "Muzaffarpur", "Darbhanga",
+  "Munger", "Saharsa", "Buxar", "Arrah", "Chapra",
+  "Samastipur", "Siwan", "Purnea", "Motihari", "Kishanganj",
+  "Bagaha", "Lakhisarai", "Bhabhua", "Khagaria", "Nawada"
+],
+"Chhattisgarh": [
+  "Raipur", "Bilaspur", "Durg", "Korba", "Rajnandgaon",
+  "Jagdalpur", "Raigarh", "Ambikapur", "Korba", "Mahasamund",
+  "Kanker", "Mungeli", "Janjgir-Champa", "Surguja", "Balod",
+  "Baloda Bazar", "Dhamtari", "Bemetara", "Kabirdham", "Jashpur"
+],
+"Goa": [
+  "Panaji", "Margao", "Vasco da Gama", "Mapusa", "Ponda",
+  "Quepem", "Bicholim", "Cortalim", "Cuncolim", "Dona Paula",
+  "Pernem", "Sanquelim", "Verna", "Chicalim", "Mormugao"
+],
+"Gujarat": [
+  "Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar",
+  "Junagadh", "Anand", "Gandhinagar", "Nadiad", "Navsari",
+  "Vapi", "Bharuch", "Amreli", "Palanpur", "Mehsana",
+  "Morbi", "Gandhidham", "Himatnagar", "Godhra", "Patan",
+  "Sihor", "Dholka", "Veraval", "Kheda", "Wadhwan"
+],
+"Haryana": [
+  "Ambala", "Faridabad", "Gurugram", "Hisar", "Karnal",
+  "Panipat", "Rewari", "Rohtak", "Sonipat", "Yamunanagar",
+  "Bhiwani", "Sirsa", "Palwal", "Mahendragarh", "Fatehabad",
+  "Jhajjar", "Charkhi Dadri", "Narnaul", "Panchkula", "Pehowa",
+  "Tohana", "Hansi", "Barwala", "Pinjore", "Nuh"
+],
+"Himachal Pradesh": [
+  "Shimla", "Manali", "Kullu", "Dharamshala", "Solan",
+  "Mandi", "Palampur", "Bilaspur", "Kangra", "Hamirpur",
+  "Chamba", "Una", "Nahan", "Kasauli", "Reckong Peo",
+  "Rampur", "Chandigarh", "Nalagarh", "Baijnath", "Sundernagar"
+],
+"Jharkhand": [
+  "Ranchi", "Jamshedpur", "Dhanbad", "Hazaribagh", "Giridih",
+  "Bokaro", "Deoghar", "Ramgarh", "Chaibasa", "Koderma",
+  "Dumka", "Pakur", "Palamu", "Saraikela", "Giridih",
+  "Latehar", "Simdega", "Khunti", "East Singhbhum", "West Singhbhum"
+],
+"Karnataka": [
+  "Bengaluru", "Mysuru", "Mangalore", "Hubli", "Dharwad",
+  "Belagavi", "Ballari", "Kalaburagi", "Bidar", "Raichur",
+  "Shimoga", "Chitradurga", "Kolar", "Tumkur", "Udupi",
+  "Davangere", "Chikkamagaluru", "Hassan", "Bagalkot", "Gadag",
+  "Chikkaballapur", "Mandya", "Haveri", "Bijapur", "Karwar",
+  "Yadgir", "Chamarajanagar", "Dakshina Kannada", "Ramanagara", "Kodagu"
+],
+"Kerala": [
+  "Thiruvananthapuram", "Kochi", "Kozhikode", "Malappuram", "Kottayam",
+  "Thrissur", "Alappuzha", "Palakkad", "Ernakulam", "Idukki",
+  "Pathanamthitta", "Kannur", "Wayanad", "Kasargod", "Kollam",
+  "Pune", "Varkala", "Attingal", "Muvattupuzha", "Kunnamkulam"
+],
+"Madhya Pradesh": [
+  "Bhopal", "Indore", "Gwalior", "Ujjain", "Jabalpur",
+  "Sagar", "Ratlam", "Rewa", "Burhanpur", "Satna",
+  "Khandwa", "Katni", "Chhindwara", "Khargone", "Seoni",
+  "Mandsaur", "Dewas", "Shivpuri", "Vidisha", "Hoshangabad"
+],
+"Maharashtra": [
+  "Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad",
+  "Thane", "Solapur", "Amravati", "Kolhapur", "Satara",
+  "Chandrapur", "Sangli", "Jalgaon", "Akola", "Beed",
+  "Dhule", "Ratnagiri", "Palghar", "Parbhani", "Latur",
+  "Raigad", "Buldhana", "Wardha", "Washim", "Osmanabad",
+  "Hingoli", "Yavatmal", "Gadchiroli", "Nandurbar", "Sindhudurg"
+],
+"Manipur": [
+  "Imphal", "Thoubal", "Kakching", "Churachandpur", "Bishnupur",
+  "Senapati", "Tamenglong", "Ukhrul", "Jiribam", "Kangpokpi"
+],
+"Meghalaya": [
+  "Shillong", "Tura", "Nongpoh", "Jowai", "Bajengdoba",
+  "Williamnagar", "Mawkyrwat", "Mairang", "Baghmara", "Rongram"
+],
+"Mizoram": [
+  "Aizawl", "Lunglei", "Saiha", "Champhai", "Kolasib",
+  "Serchhip", "Lawngtlai", "Mamit", "Hnahthial", "Khawzawl"
+],
+"Nagaland": [
+  "Kohima", "Dimapur", "Mokokchung", "Mon", "Tuensang",
+  "Wokha", "Zunheboto", "Phek", "Peren", "Longleng"
+],
+"Odisha": [
+  "Bhubaneswar", "Cuttack", "Berhampur", "Rourkela", "Sambalpur",
+  "Balasore", "Puri", "Koraput", "Angul", "Jharsuguda",
+  "Bargarh", "Kendrapara", "Nayagarh", "Phulbani", "Kendujhar"
+],
+"Punjab": [
+  "Amritsar", "Ludhiana", "Chandigarh", "Jalandhar", "Patiala",
+  "Bathinda", "Moga", "Hoshiarpur", "Mohali", "Firozpur",
+  "Kapurthala", "Rupnagar", "Sangrur", "Faridkot", "Mansa"
+],
+"Rajasthan": [
+  "Jaipur", "Udaipur", "Jodhpur", "Kota", "Ajmer",
+  "Bikaner", "Alwar", "Sikar", "Pali", "Churu",
+  "Tonk", "Chittorgarh", "Bhilwara", "Nagaur", "Barmer"
+],
+"Sikkim": [
+  "Gangtok", "Namchi", "Mangan", "Jorethang", "Rangpo"
+],
+"Tamil Nadu": [
+  "Chennai", "Coimbatore", "Madurai", "Trichy", "Tirunelveli",
+  "Salem", "Erode", "Vellore", "Tiruppur", "Thoothukudi",
+  "Chidambaram", "Kanchipuram", "Nagercoil", "Pudukkottai", "Cuddalore"
+],
+"Telangana": [
+  "Hyderabad", "Warangal", "Khammam", "Nizamabad", "Karimnagar",
+  "Ramagundam", "Mahabubnagar", "Nalgonda", "Adilabad", "Suryapet",
+  "Sangareddy", "Jagtial", "Jagitial", "Medak", "Bhongir"
+],
+"Tripura": [
+  "Agartala", "Udaipur", "Dharmanagar", "Kailashahar", "Belonia",
+  "Khowai", "Teliamura", "Amarpur", "Bagbasa", "Radhakishorepur"
+],
+"Uttar Pradesh": [
+  "Agra", "Aligarh", "Allahabad", "Bareilly", "Ghaziabad",
+  "Kanpur", "Lucknow", "Mathura", "Meerut", "Moradabad",
+  "Noida", "Varanasi", "Gorakhpur", "Saharanpur", "Fatehpur"
+],
+"Uttarakhand": [
+  "Dehradun", "Haridwar", "Nainital", "Rishikesh", "Roorkee",
+  "Almora", "Pithoragarh", "Udham Singh Nagar", "Haldwani", "Rudrapur"
+],
+"West Bengal": [
+  "Kolkata", "Howrah", "Siliguri", "Durgapur", "Asansol",
+  "Burdwan", "Malda", "Kolar", "Kamarhati", "Darjeeling"
+],
+"Andaman and Nicobar Islands": [
+  "Port Blair", "Diglipur", "Mayabunder", "Car Nicobar", "Havelock"
+],
+"Chandigarh": [
+  "Chandigarh"
+],
+"Dadra and Nagar Haveli and Daman and Diu": [
+  "Daman", "Diu", "Silvassa"
+],
+"Delhi": [
+  "Central Delhi", "East Delhi", "New Delhi", "North Delhi", "North East Delhi", 
+  "North West Delhi", "Shahdara", "South Delhi", "South West Delhi", "West Delhi"
+],
+
+"Jammu and Kashmir": [
+  "Jammu", "Srinagar", "Anantnag", "Baramulla", "Pulwama", 
+  "Kathua", "Kupwara", "Rajouri", "Udhampur", "Sopore",
+  "Jammu", "Bandipora", "Kulgam", "Poonch", "Reasi"
+],
+"Ladakh": [
+  "Leh", "Kargil"
+],
+"Lakshadweep": [
+  "Kavaratti", "Agatti", "Minicoy", "Andrott", "Amini", "Chetlat", "Kalapeni", "Kiltan", "Suheli Par"
+],
+"Puducherry": [
+  "Puducherry", "Karaikal", "Mahe", "Yanam"
+],
+          // Add more states and cities here as needed
+        };
+      
+        // Function to update city dropdown based on selected state
+        function updateCities() {
+          const stateSelect = document.getElementById("state");
+          const citySelect = document.getElementById("city");
+          const selectedState = stateSelect.value;
+      
+          // Clear existing city options
+          citySelect.innerHTML = '<option value="">Select City</option>';
+      
+          // Populate city options based on selected state
+          if (citiesByState[selectedState]) {
+            citiesByState[selectedState].forEach(city => {
+              const option = document.createElement("option");
+              option.value = city;
+              option.textContent = city;
+              citySelect.appendChild(option);
+            });
+          }
+        }
+      </script>
+  </body>
+  </html>
+  
